@@ -24,6 +24,9 @@ public class Salary implements Serializable {
 		this.salary = salary;
 	}
 	
-	
+	@Override
+	public String toString() {
+		return "id="+this.id+" ,"+"salary="+this.salary;
+	}
 	
 }

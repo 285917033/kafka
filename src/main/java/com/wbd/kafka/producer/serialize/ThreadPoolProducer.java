@@ -44,13 +44,13 @@ public class ThreadPoolProducer extends Thread {
 	public void run() {
 		Producer<String, Salary> producer = new KafkaProducer<String, Salary>(configure());
 		// 异步发送100条信息到指定的 主题中
-
+      for(int i=600;i<10000;i++) {
 		Salary s = new Salary();
-		s.setId("100");
-		s.setSalary("125");
+		s.setId("id"+i);
+		s.setSalary("薪水"+i);
 
 		producer.send(new ProducerRecord<String, Salary>("exchanger", "abc", s), new Callback() {
-			// 异步发送消息完成之后，调用的方法
+			// 异步发送消息完成之后，调用的方ConsumerSubscribe.java法
 			public void onCompletion(RecordMetadata metadata, Exception exception) {
 
 				if (exception != null) {
@@ -63,6 +63,7 @@ public class ThreadPoolProducer extends Thread {
 			}
 
 		});
+      }
 
 		try {
 			sleep(4000);
